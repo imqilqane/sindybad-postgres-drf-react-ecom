@@ -11,7 +11,9 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # apps
-    path('api/auth', include('user.urls', namespace='user')),
+    path('api/auth/', include('user.urls', namespace='user')),
+    path('api/products/', include('product.urls', namespace='product')),
+    path('api/checkout/', include('checkout.urls', namespace='checkout')),
 
 
 ]
