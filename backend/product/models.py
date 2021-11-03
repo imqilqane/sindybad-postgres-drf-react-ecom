@@ -41,7 +41,7 @@ class Product(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name[:70]} ..."
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -70,7 +70,7 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     order_number = models.CharField(max_length=35)
     payment = models.ForeignKey(
-        Payment, on_delete=models.CASCADE, related_name="get_payment")
+        Payment, on_delete=models.CASCADE, related_name="get_payment", null=True, blank=True)
     adress = models.ForeignKey(Address, models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 

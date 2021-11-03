@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from rest_framework.views import APIView
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from tools.utils import get_user
 from user.models import User
@@ -36,6 +36,7 @@ class SingleProtuctApiView(APIView):
 
 
 class AddToCartAPIView(APIView):
+    permession_classes = [permissions.IsAuthenticated]
     def get(self, request, pk):
         user = get_user(request)
         item = get_object_or_404(Product, id=pk)
@@ -50,20 +51,22 @@ class AddToCartAPIView(APIView):
                 order_item.save()
                 return Response({"Success": "this item quantity has been updated"}, status=status.HTTP_200_OK)
             else:
-                order_item = OrderedItem.object.create(user=user, item=item)
+                order_item = OrderedItem.objects.create(user=user, item=item)
                 order.items.add(order_item)
                 order.save()
                 return Response({"Success": "this item has been added to your cart"}, status=status.HTTP_200_OK)
 
         else:
             order = Order.objects.create(user=user)
-            order_item = OrderedItem.object.create(user=user, item=item)
+            order_item = OrderedItem.objects.create(user=user, item=item)
             order.items.add(order_item)
             order.save()
             return Response({"Success": "this item has been added to your cart"}, status=status.HTTP_200_OK)
 
 
 class RemoveFromCartAPIView(APIView):
+    permession_classes = [permissions.IsAuthenticated]
+
     def get(self, request, pk):
         user = get_user(request)
         item = get_object_or_404(Product, id=pk)
@@ -74,7 +77,7 @@ class RemoveFromCartAPIView(APIView):
                 user=user, item=item, ordered=False)
             if order_item_qs.exists():
                 order_item = order_item_qs[0]
-                order.remove(order_item)
+                order.items.remove(order_item)
                 order_item.delete()
                 order.save()
                 return Response({"Success": "this item has been removed from your cart"}, status=status.HTTP_200_OK)
@@ -86,6 +89,8 @@ class RemoveFromCartAPIView(APIView):
 
 
 class DecreaseItemQtsAPIView(APIView):
+    permession_classes = [permissions.IsAuthenticated]
+
     def get(self, request, pk):
         user = get_user(request)
         item = get_object_or_404(Product, id=pk)
@@ -114,6 +119,8 @@ class DecreaseItemQtsAPIView(APIView):
 
 
 class IncreaseItemQtsAPIView(APIView):
+    permession_classes = [permissions.IsAuthenticated]
+
     def get(self, request, pk):
         user = get_user(request)
         item = get_object_or_404(Product, id=pk)
