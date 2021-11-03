@@ -37,6 +37,7 @@ class SingleProtuctApiView(APIView):
 
 class AddToCartAPIView(APIView):
     permession_classes = [permissions.IsAuthenticated]
+
     def get(self, request, pk):
         user = get_user(request)
         item = get_object_or_404(Product, id=pk)

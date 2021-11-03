@@ -13,7 +13,7 @@ class Address(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name_plural = "addresses"
@@ -25,7 +25,7 @@ class Payment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name_plural = "payments"
