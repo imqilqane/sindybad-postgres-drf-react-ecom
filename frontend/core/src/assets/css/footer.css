@@ -1,0 +1,66 @@
+/* news letter  */
+.row.news-letter {
+  text-align: center;
+  padding: 20px;
+  align-items: center;
+}
+
+.row.news-letter input#email {
+  font-size: 12px;
+  padding: 4px;
+  width: 50%;
+  border: 1px solid #0d0d0d;
+  outline: none;
+}
+
+.row.news-letter .sub {
+  transform: translateY(40%);
+}
+
+.row.news-letter button {
+  outline: none;
+  border: none;
+  color: #e7e8e7;
+  background: #0d0d0d;
+  font-size: 14px;
+  padding: 4px 15px 4.5px;
+}
+
+/* bottom-footer */
+
+.bottom-footer {
+  background-color: #262626;
+  color: #e7e8e7;
+  padding: 15px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.bottom-footer .first ul {
+  list-style: none;
+  text-align: left;
+}
+
+.bottom-footer .first .card-item h5 {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.first {
+  margin: 40px 0;
+}
+
+.bottom-footer .second ul {
+  list-style: none;
+  display: flex;
+}
+
+.bottom-footer .second ul li {
+  padding: 0 15px;
+}
+
+.second {
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid;
+}

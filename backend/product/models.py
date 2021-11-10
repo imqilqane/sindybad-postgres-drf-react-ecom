@@ -60,7 +60,7 @@ class OrderedItem(models.Model):
         return self.quantity * self.item.price
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Order(models.Model):
@@ -73,6 +73,8 @@ class Order(models.Model):
         Payment, on_delete=models.CASCADE, related_name="get_payment", null=True, blank=True)
     adress = models.ForeignKey(Address, models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    in_refund = models.BooleanField(default=False)
+    refund_refunded = models.BooleanField(default=False)
 
     def get_total(self):
         total = 0
@@ -81,4 +83,4 @@ class Order(models.Model):
         return total
 
     def __str__(self):
-        return self.user
+        return self.user.username

@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/auth/', include('user.urls', namespace='user')),
     path('api/products/', include('product.urls', namespace='product')),
     path('api/checkout/', include('checkout.urls', namespace='checkout')),
+    path('api/refund/', include('refund.urls', namespace='refund')),
 
 
 ]

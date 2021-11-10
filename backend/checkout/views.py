@@ -64,7 +64,6 @@ class PaymentAPIView(APIView):
             order = order_qs[0]
             amount = order.get_total() * 100
             payment_method_id = request.data['payment_method_id']
-
             customers_data = stripe.Customer.list(email=user.email).data
 
             if len(customers_data) == 0:
