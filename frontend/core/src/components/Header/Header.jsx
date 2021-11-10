@@ -1,14 +1,14 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import "../../assets/css/header.css"
 import PopUpSearch from './PopUpSearch';
+import PopUpCart from './PopUpCart';
+
+
 const Header = () => {
-    const apearRef = useRef();
+    const searchRef = useRef();
     const apear = (e) => {
-        const display = apearRef.current.style.display;
-        {}
-        apearRef.current.style.display = "block";
-        
+        searchRef.current.style.display = "block";
     }
     return (
         <>
@@ -32,8 +32,10 @@ const Header = () => {
                         <div className="pages2">
                         <ul className="list">
                                
-                                <li className='cart-i list-item'><NavLink to="#" ><i className="cart fa fa-shopping-cart" aria-hidden="true"></i>
-                                </NavLink></li>
+                                <li className='cart-i list-item'>
+                                    <i className="cart fa fa-shopping-cart" aria-hidden="true"></i>
+                                    <PopUpCart />
+                                </li>
                                 <li className="profile list-item">
                                     <div className="image">
                                         <img src="https://via.placeholder.com/50" alt="" />
@@ -71,7 +73,7 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-                <PopUpSearch apearRef={apearRef} />
+                <PopUpSearch searchRef={searchRef} />
             </nav>
         </>
     );

@@ -63,7 +63,9 @@ nav .container .content .list .list-item .fa-search {
   position: absolute;
   top: -6px;
 }
-
+.cart-i {
+  position: relative;
+}
 .cart-i:hover {
   color: #d8c69c;
 }
@@ -157,7 +159,9 @@ nav .container .content .list .list-item:hover {
   color: #d8c69c;
   cursor: pointer;
 }
-
+.dropdown, .dropup {
+  z-index: -1;
+}
 .catigories .list .list-item .dropdown-item {
   color: #0d0d0d !important;
 }
@@ -187,13 +191,53 @@ nav .container .content .list .list-item:hover {
   width: 50%;
   border: 1px solid #0d0d0d;
   outline: none;
+  text-transform: lowercase;
 }
 
 .pop-up-search .row .col-md-8 button {
   outline: none;
+    border: none;
+    color: #e7e8e7;
+    background: #0d0d0d;
+    font-size: 14px;
+    padding: 3px 15px 5.5px;
+}
+
+
+.close {
+  position: absolute;
+  top: 20%;
+  right: 0;
+}
+
+
+.pop-up-cart {
+  position: absolute;
+  width: 500px;
+  transform: translateX(-48%);
+  color: black;
+  padding: 10px;
+  outline: none;
   border: none;
-  color: #e7e8e7;
-  background: #0d0d0d;
-  font-size: 14px;
-  padding: 4px 15px 4.5px;
+  border-radius: 5px;
+  top: 15px
+;
+}
+
+
+.pop-up-cart::before {
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #e7e8e7;
+  width: 0;
+  height: 0;
+}
+
+.col-container {
+  background-color: #e7e8e7;
+  padding: 15px 5px;
+  z-index: 1;
 }
