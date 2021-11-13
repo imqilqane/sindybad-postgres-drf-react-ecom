@@ -1,0 +1,55 @@
+.cart-summary {
+  background: #f7f7f7;
+}
+.shipping-info-container {
+  padding-left: 0;
+}
+.shipping-info-container .row {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.add-address .row {
+  width: 100%;
+}
+input {
+  width: 100%;
+  margin: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+.shipping-info .col-md-6 {
+  padding: 0;
+  margin: 0;
+}
+.shipping-info .col-md-6 input {
+  width: 94%;
+}
+.contact-lebal {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
+}
+
+.contact-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.contact-input input {
+  width: 98%;
+  margin: 0;
+}
+button.btn.btn-dark {
+  width: 100%;
+  background: #0d0d0d;
+}
+
+.row.btns {
+  align-items: center;
+  padding: 14px;
+}
+
+.cart-summary .row.calc .row.total-qts {
+  border-bottom: 1px solid #c7c7c7;
+  margin: 14px 0 0 0;
+}

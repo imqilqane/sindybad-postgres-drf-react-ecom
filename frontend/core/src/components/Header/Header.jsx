@@ -7,12 +7,23 @@ import PopUpCart from './PopUpCart';
 
 const Header = () => {
     const searchRef = useRef();
-    const apear = (e) => {
-        searchRef.current.style.display = "block";
+    const cartRef = useRef();
+    const apearSearch = (e) => {
+        searchRef.current.className += " pop-up-search-active";
+        setTimeout(()=> {
+            searchRef.current.className += " add-search-showing-style";
+        }, 30)
+    }
+    const showCart = () => {
+        cartRef.current.className += ' pop-up-cart-active';
+        setTimeout(()=>{
+            cartRef.current.className += ' add-showing-style'
+        }, 30);
     }
     return (
         <>
             <nav>
+                <PopUpCart cartRef={cartRef} />
                 <div className="top-nav">
                     <p>FREE SHIPPING FOR ALL AUSTRALIAN ORDERS OVER $200</p>
                 </div>
@@ -20,10 +31,23 @@ const Header = () => {
                     <div className="content">
                         <div className="pages">
                             <ul className="list">
-                                <li className='list-item'><NavLink to="#" >Sing in </NavLink></li>
-                                <li className='list-item slash'><NavLink to="#" >Register </NavLink></li>
-                                <li className='list-item' onClick={apear}><i className="fa fa-search" aria-hidden="true"></i>
-   search </li>
+                                {   
+                                    localStorage.getItem('access') 
+                                    ?
+                                    <li className='list-item' onClick={apearSearch}>
+                                        <i className="fa fa-search" aria-hidden="true"></i>
+                                    search </li>
+                                    :
+                                    <>
+                                    <li className='list-item'><NavLink to="/sing-in" >Sing in </NavLink></li>
+                                    <li className='list-item slash'><NavLink to="#" >Register </NavLink></li>
+                                    <li className='list-item' onClick={apearSearch}>
+                                        <i className="fa fa-search" aria-hidden="true"></i>
+                                    search </li>
+                                    </>
+                                }
+                                
+                                
                             </ul>
                         </div>
                         <div className="logo">
@@ -32,9 +56,8 @@ const Header = () => {
                         <div className="pages2">
                         <ul className="list">
                                
-                                <li className='cart-i list-item'>
-                                    <i className="cart fa fa-shopping-cart" aria-hidden="true"></i>
-                                    <PopUpCart />
+                                <li className='cart-i list-item' onClick={showCart}>
+                                    <i className="cart-header fa fa-shopping-cart" aria-hidden="true"></i>
                                 </li>
                                 <li className="profile list-item">
                                     <div className="image">
@@ -73,8 +96,9 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-                <PopUpSearch searchRef={searchRef} />
             </nav>
+            <PopUpSearch searchRef={searchRef} />
+
         </>
     );
 };

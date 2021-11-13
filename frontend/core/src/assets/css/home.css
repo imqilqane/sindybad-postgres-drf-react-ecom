@@ -1,6 +1,6 @@
 .slider {
   position: relative;
-  z-index: -1;
+  z-index: 0;
 }
 
 .row .slider-image img {
@@ -191,4 +191,8 @@ p.cat-name {
 }
 p.bold {
   font-weight: 600;
+}
+
+.second-slider {
+  z-index: 0;
 }

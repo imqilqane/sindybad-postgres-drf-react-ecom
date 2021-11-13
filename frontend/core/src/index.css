@@ -16,3 +16,8 @@ code {
 a:hover {
   text-decoration: none;
 }
+
+.back-to-cart {
+  color: grey;
+  margin-left: 20px;
+}
