@@ -21,6 +21,8 @@ class ListProtuctsApiView(generics.ListAPIView):
 
 
 class SingleProtuctApiView(APIView):
+    permession_classes = [permissions.AllowAny]
+
     serializer_class = ListProductSerializer
     queryset = Product.objects.all()
 

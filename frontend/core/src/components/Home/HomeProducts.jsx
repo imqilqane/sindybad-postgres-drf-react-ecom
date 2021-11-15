@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../axios';
+
 
 import one from "../../assets/images/one.jfif"
 import two from "../../assets/images/two.jfif"
@@ -10,76 +12,60 @@ import two2 from "../../assets/images/two2.jfif"
 import three3 from "../../assets/images/three3.jfif"
 import fore4 from "../../assets/images/fore4.jfif"
 
+
+
 const HomeProducts = () => {
+
+    const [load , setLoad] = useState(true)
+    const [items, setItems] = useState([])
+
+    useEffect(()=> {
+        axiosInstance.get('products/all/').then(res => {
+            setItems(res.data);
+            console.log(res.data);
+            setLoad(false)
+        }).catch(err => {
+            console.log(err);
+        })
+    },[])
+
+    if (load) {
+        return (
+            <h1>Is loading</h1>
+        )
+    }
+
+    
+
     return (
         <div className="home-products">
             <h3>Featured Products</h3>
             <p>See What’s Trending Right Now</p>
             <div className="row">
+                {
+                    items.map((product, key) => {
+                        return (<div className="col-md-3 product-card">
+                            <Link to={`product/${product.slug}`}>
+                                <div className="row product-img">
+                                    <img src={product.main_image} alt="" />
+                                </div>
+                                <div className="row product-info">
+                                    <div className="product-title">
+                                        <p>{product.name.substring(0,50)} ... </p>
+                                    </div>
+                                    <div className="product-price">
+                                        <p>${product.price}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>)
+                    })
+                }
                 
-                <div className="col-md-3 product-card">
-                    <Link to="product/ss">
-                        <div className="row product-img">
-                            <img src={one} alt="" />
-                        </div>
-                        <div className="row product-info">
-                            <div className="product-title">
-                                <p>Wood Headphone Stand</p>
-                            </div>
-                            <div className="product-price">
-                                <p>$150</p>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                <div className="col-md-3 product-card">
-                    <a href="">
-                        <div className="row product-img">
-                            <img src={two} alt="" />
-                        </div>
-                        <div className="row product-info">
-                            <div className="product-title">
-                                <p>Wool Felt Desk Pad</p>
-                            </div>
-                            <div className="product-price">
-                                <p>$160</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div className="col-md-3 product-card">
-                    <a href="">
-                    <div className="row product-img">
-                        <img src={three} alt="" />
-                    </div>
-                    <div className="row product-info">
-                         <div className="product-title">
-                            <p>Wood Planter</p>
-                        </div>
-                        <div className="product-price">
-                            <p>$30</p>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div className="col-md-3 product-card">
-                    <a href="">
-                    <div className="row product-img">
-                        <img src={fore} alt="" />
-                    </div>
-                    <div className="row product-info">
-                         <div className="product-title">
-                            <p>Wood Apple Keyboard Tray</p>
-                        </div>
-                        <div className="product-price">
-                            <p>$40</p>
-                        </div>
-                    </div>
-                    </a>
-                </div>
+             
             </div>
 
-            <div className="row">
+            {/* <div className="row">
                 
                 <div className="col-md-3 product-card">
                     <a href="">
@@ -143,7 +129,7 @@ const HomeProducts = () => {
                     </div>
                     </a>           
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

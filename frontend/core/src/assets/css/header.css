@@ -52,7 +52,7 @@ nav .container .content .list .list-item .fa-search {
   position: relative;
 }
 .cart-header::after {
-  content: "1";
+  content: attr(cart_qts);
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -327,4 +327,9 @@ nav .container .content .list .list-item:hover {
 .go-cart:hover {
   color: white;
   background-color: black;
+}
+
+
+.product-title {
+  line-height: 1.2;
 }

@@ -37,7 +37,10 @@ const Header = () => {
                                     <li className='list-item' onClick={apearSearch}>
                                         <i className="fa fa-search" aria-hidden="true"></i>
                                     search </li>
+
                                     :
+                                    
+
                                     <>
                                     <li className='list-item'><NavLink to="/sing-in" >Sing in </NavLink></li>
                                     <li className='list-item slash'><NavLink to="#" >Register </NavLink></li>
@@ -57,7 +60,7 @@ const Header = () => {
                         <ul className="list">
                                
                                 <li className='cart-i list-item' onClick={showCart}>
-                                    <i className="cart-header fa fa-shopping-cart" aria-hidden="true"></i>
+                                    <i className="cart-header fa fa-shopping-cart" aria-hidden="true" cart_qts='0'></i>
                                 </li>
                                 <li className="profile list-item">
                                     <div className="image">

@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,5 +18,4 @@ urlpatterns = [
     path('api/checkout/', include('checkout.urls', namespace='checkout')),
     path('api/refund/', include('refund.urls', namespace='refund')),
 
-
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
