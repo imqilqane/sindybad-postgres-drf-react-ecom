@@ -139,3 +139,14 @@ class IncreaseItemQtsAPIView(APIView):
                 return Response({"Success": "this item quantity has been updated"}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "you don't have any active orders"}, status=status.HTTP_404_BAD_REQUEST)
+
+
+class CartItemsAPIView(APIView):
+    def get(self, request):
+        user = get_user(request)
+        order_qs = Order.objects.filter(user=user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            data = {
+                # 'items' : [item for item in order.]
+            }

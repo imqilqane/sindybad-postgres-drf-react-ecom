@@ -46,7 +46,7 @@ class RegisterAPIView(APIView):
                 [user.email, ]
             )
             message.send()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class VerifyACountAPIView(generics.GenericAPIView):
