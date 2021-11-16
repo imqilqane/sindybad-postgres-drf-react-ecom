@@ -10,6 +10,8 @@ class TestViews(TestSetUp):
         self.assertEqual(res.status_code, 400)
 
     def test_user_regestration_with_valid_data(self):
+        """test the case when user try to register with valid data"""
+
         res = self.client.post(self.regiter_url, self.user_data, format='json')
 
         self.assertEqual(res.status_code, 201)
