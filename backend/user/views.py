@@ -1,3 +1,4 @@
+from datetime import date
 from django.core import exceptions
 from django.shortcuts import render
 from django.urls import reverse
@@ -46,7 +47,11 @@ class RegisterAPIView(APIView):
                 [user.email, ]
             )
             message.send()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            data = {
+                "token": str(token),
+                **serializer.data
+            }
+            return Response(data, status=status.HTTP_201_CREATED)
 
 
 class VerifyACountAPIView(generics.GenericAPIView):
@@ -89,10 +94,11 @@ class RequestNewPassWordAPIView(APIView):
                 [user.email, ]
             )
             message.send()
-
-            return Response({'success': 'We have send a reset password link to your email'}, status=status.HTTP_200_OK)
+            data = {'success': 'We have send a reset password link to your email',
+                    'token': str(token), 'uidb64': uidb64}
+            return Response(data, status=status.HTTP_200_OK)
         else:
-            return Response({'Error': 'This email is not exists'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Error': 'This email is not exists'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class ResetPassWordAPIView(APIView):
@@ -113,7 +119,7 @@ class ResetPassWordAPIView(APIView):
                     'token': token
                 }, status=status.HTTP_200_OK)
         except DjangoUnicodeDecodeError as e:
-            return Response({'Error', 'faild to decode the information'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Error', 'faild to decode the information'}, status=status.HTTP_401_UNAUTHORIZED)
 
     def post(self, request, uidb64, token):
         serializer = self.serializer_class(data=request.data)

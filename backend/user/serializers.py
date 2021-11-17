@@ -1,12 +1,9 @@
-from django.core import exceptions
-from django.core.exceptions import ValidationError
-from django.db.models import fields
+from rest_framework import serializers, exceptions
 from django.contrib.auth import authenticate, tokens
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import DjangoUnicodeDecodeError, force_str, smart_bytes, smart_str
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
-from rest_framework import serializers
 
 from .models import User
 
@@ -53,7 +50,6 @@ class ResetPassWordSerializer(serializers.Serializer):
         fields = ['uidb64', 'token', 'password']
 
     def validate(self, attrs):
-        print(attrs)
         uidb64 = attrs.get('uidb64')
         password = attrs.get('password')
         token = attrs.get('token')
@@ -61,16 +57,18 @@ class ResetPassWordSerializer(serializers.Serializer):
         id = force_str(urlsafe_base64_decode(uidb64))
         user_qs = User.objects.filter(id=id)
         if user_qs.exists():
+
             user = user_qs[0]
             token = PasswordResetTokenGenerator().check_token(user, token)
+
             if not token:
-                raise ValidationError('This token is invalid')
+                raise exceptions.ValidationError('This token is invalid')
             if not user.is_active:
-                raise ValidationError('This account is blocked')
+                raise exceptions.ValidationError('This account is blocked')
             if not user.is_verify:
-                raise ValidationError('Please verify your email')
+                raise exceptions.ValidationError('Please verify your email')
             user.set_password(password)
-            user.save
+            user.save()
             return super().validate(attrs)
 
         else:
@@ -101,11 +99,11 @@ class LoginSerializer(serializers.Serializer):
 
         user = authenticate(email=email, password=password)
         if not user:
-            raise exceptions.ValidationError('there is no such user')
+            raise exceptions.AuthenticationFailed('there is no such user')
         if not user.is_active:
-            raise exceptions.ValidationError('this account is blocked')
+            raise exceptions.AuthenticationFailed('this account is blocked')
         if not user.is_verify:
-            raise exceptions.ValidationError('please verify your email')
+            raise exceptions.AuthenticationFailed('please verify your email')
 
         return {
             'email': user.email,
