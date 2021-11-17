@@ -63,6 +63,7 @@ nav .container .content .list .list-item .fa-search {
   padding: 2px;
   position: absolute;
   top: -6px;
+  color: black;
 }
 
 .cart-i:hover {
@@ -301,6 +302,7 @@ nav .container .content .list .list-item:hover {
 .item-pop-cart-info .title {
   text-transform: uppercase;
   font-weight: 600;
+  line-height: 1.1;
 }
 .item-pop-cart-info .price {
   font-size: 14px;
@@ -328,7 +330,6 @@ nav .container .content .list .list-item:hover {
   color: white;
   background-color: black;
 }
-
 
 .product-title {
   line-height: 1.2;

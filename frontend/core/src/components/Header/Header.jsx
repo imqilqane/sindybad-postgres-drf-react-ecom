@@ -1,13 +1,15 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import "../../assets/css/header.css"
 import PopUpSearch from './PopUpSearch';
 import PopUpCart from './PopUpCart';
+import axiosInstance from '../../axios';
 
 
 const Header = () => {
     const searchRef = useRef();
     const cartRef = useRef();
+    const [cartQt, setCartQt] = useState("0")
     const apearSearch = (e) => {
         searchRef.current.className += " pop-up-search-active";
         setTimeout(()=> {
@@ -20,6 +22,17 @@ const Header = () => {
             cartRef.current.className += ' add-showing-style'
         }, 30);
     }
+    useEffect(() => {
+        axiosInstance.get('products/cart-items-qts/').then(
+            res => {
+                setCartQt('' + res.data.qts)
+            }
+        ).catch(
+            err => {
+                console.log(err);
+            }
+        )
+    },[])
     return (
         <>
             <nav>
@@ -60,7 +73,7 @@ const Header = () => {
                         <ul className="list">
                                
                                 <li className='cart-i list-item' onClick={showCart}>
-                                    <i className="cart-header fa fa-shopping-cart" aria-hidden="true" cart_qts='0'></i>
+                                    <i className="cart-header fa fa-shopping-cart" aria-hidden="true" cart_qts={cartQt} ></i>
                                 </li>
                                 <li className="profile list-item">
                                     <div className="image">

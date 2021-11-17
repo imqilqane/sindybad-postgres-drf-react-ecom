@@ -1,3 +1,4 @@
+from functools import reduce
 from django.shortcuts import get_object_or_404, render
 from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
@@ -141,12 +142,35 @@ class IncreaseItemQtsAPIView(APIView):
             return Response({"error": "you don't have any active orders"}, status=status.HTTP_404_BAD_REQUEST)
 
 
+class CartItemsQtsAPIView(APIView):
+    def get(self, request):
+        user = get_user(request)
+
+        order_qs = Order.objects.filter(user=user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            items_qts = [item.quantity for item in order.items.all()]
+            qts = reduce((lambda x, y: x + y), items_qts)
+            data = {
+                'qts': qts
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class CartItemsAPIView(APIView):
     def get(self, request):
         user = get_user(request)
         order_qs = Order.objects.filter(user=user, ordered=False)
+
         if order_qs.exists():
             order = order_qs[0]
+            items = [[item.item.id, item.quantity, item.get_price()]
+                     for item in order.items.all()]
             data = {
-                # 'items' : [item for item in order.]
+                'items': items
             }
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)

@@ -22,11 +22,12 @@ const HomeProducts = () => {
     useEffect(()=> {
         axiosInstance.get('products/all/').then(res => {
             setItems(res.data);
-            console.log(res.data);
             setLoad(false)
         }).catch(err => {
             console.log(err);
-        })
+        });
+        console.log(items);
+
     },[])
 
     if (load) {
