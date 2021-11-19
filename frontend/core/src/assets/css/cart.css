@@ -17,7 +17,8 @@
   align-items: center;
 }
 .cart-item .cart-image-info .row .cart-image img {
-  width: 100%;
+  width: 80%;
+  margin: 10px;
 }
 .cart-item .cart-image-info .row .cart-info {
   font-size: 14px;
@@ -48,4 +49,8 @@
   background-color: black;
   text-transform: uppercase;
   color: white;
+}
+
+.col-md-6.cart-info p {
+  line-height: 1.1;
 }

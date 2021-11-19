@@ -315,7 +315,12 @@ nav .container .content .list .list-item:hover {
 .remove {
   font-size: 13px;
   border-top: 1px solid;
-  padding-top: 8 px;
+  padding-top: 8px;
+}
+
+.remove:hover {
+  cursor: pointer;
+  color: black;
 }
 
 .go-cart {
