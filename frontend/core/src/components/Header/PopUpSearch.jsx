@@ -13,7 +13,7 @@ const PopUpSearch = (props) => {
                         <input type="text" name="search" id="search" placeholder="Key Word"/>
                         <button>Search</button>
                     </form>
-                    <span class="close" aria-hidden="true" onClick={closeSreach} >Close</span>
+                    <span className="close" aria-hidden="true" onClick={closeSreach} >Close</span>
                 </div>
                
             </div>

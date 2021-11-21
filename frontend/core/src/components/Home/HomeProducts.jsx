@@ -2,18 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../axios';
 
-
-import one from "../../assets/images/one.jfif"
-import two from "../../assets/images/two.jfif"
-import three from "../../assets/images/three.jfif"
-import fore from "../../assets/images/fore.jfif"
-import one1 from "../../assets/images/one1.jfif"
-import two2 from "../../assets/images/two2.jfif"
-import three3 from "../../assets/images/three3.jfif"
-import fore4 from "../../assets/images/fore4.jfif"
-
-
-
 const HomeProducts = () => {
 
     const [load , setLoad] = useState(true)

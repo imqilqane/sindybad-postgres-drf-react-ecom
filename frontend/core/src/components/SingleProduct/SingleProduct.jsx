@@ -4,6 +4,8 @@ import "../../assets/css/single-product.css"
 import SecondeSlider from '../Home/SecondeSlider';
 import axiosInstance from '../../axios';
 import { useParams } from 'react-router';
+
+
 const SingleProduct = () => {
     window.scrollTo(0, 0);
     const [item, setItem] = useState([]);
@@ -12,7 +14,6 @@ const SingleProduct = () => {
 
     useEffect(()=>{
         axiosInstance.get(`products/single/${slug}`).then(res => {
-            console.log(res.data);
             setItem(res.data);
             setLoad(false);
         }).catch(err => {
@@ -61,12 +62,12 @@ const SingleProduct = () => {
                                     </div>
                                     <div className="col-md-6 shipping">
                                         <p className="shipping-type">  
-                                        <i class="fa fa-truck mr-1" aria-hidden="true"></i>
+                                        <i className="fa fa-truck mr-1" aria-hidden="true"></i>
 
                                         Standar shipping
                                         </p>
                                         <p className="shipping-desc">
-                                        <i class="fa fa-check-circle mr-1 text-success" aria-hidden="true"></i>
+                                        <i className="fa fa-check-circle mr-1 text-success" aria-hidden="true"></i>
                                         Available for standar shipping
                                         </p>
                                     </div>

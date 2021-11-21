@@ -77,7 +77,7 @@ const Footer = () => {
                                 </div>
                                 <div className="col-md-4">
                                     
-                                    <div class="copy_right">
+                                    <div className="copy_right">
                                         <p>Copyright &copy; <span id="year"></span>  sindybad.com | {getYear()} All right reserved</p>
                                     </div>
                                 </div>
