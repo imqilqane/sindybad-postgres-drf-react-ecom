@@ -150,7 +150,10 @@ class CartItemsQtsAPIView(APIView):
         if order_qs.exists():
             order = order_qs[0]
             items_qts = [item.quantity for item in order.items.all()]
-            qts = reduce((lambda x, y: x + y), items_qts)
+            if len(items_qts) > 0:
+                qts = reduce((lambda x, y: x + y), items_qts)
+            else:
+                qts = 0
             data = {
                 'qts': qts
             }
